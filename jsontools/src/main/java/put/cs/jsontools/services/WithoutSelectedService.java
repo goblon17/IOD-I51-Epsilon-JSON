@@ -4,5 +4,5 @@ import put.cs.jsontools.exceptions.InvalidJsonFormatException;
 
 
 public interface WithoutSelectedService {
-    String getOnlySelectedJson(String json, String keys) throws InvalidJsonFormatException;
+    String getWithoutSelectedJson(String json, String keys) throws InvalidJsonFormatException;
 }

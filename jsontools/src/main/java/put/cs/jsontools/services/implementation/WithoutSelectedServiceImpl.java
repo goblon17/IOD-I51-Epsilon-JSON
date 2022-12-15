@@ -12,7 +12,7 @@ public class WithoutSelectedServiceImpl implements WithoutSelectedService {
 
     public WithoutSelectedServiceImpl(WithoutSelectedTransformation transformation) {this.transformation = transformation;}
     @Override
-    public String getOnlySelectedJson(String json, String keys) throws InvalidJsonFormatException {
+    public String getWithoutSelectedJson(String json, String keys) throws InvalidJsonFormatException {
         String result = transformation.transformToWithoutSelected(json, keys);
         if (result == null) {
             throw new InvalidJsonFormatException();

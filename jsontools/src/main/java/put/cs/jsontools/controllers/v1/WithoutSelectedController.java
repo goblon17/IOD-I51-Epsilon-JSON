@@ -8,17 +8,17 @@ import put.cs.jsontools.services.WithoutSelectedService;
 @RestController
 @RequestMapping(WithoutSelectedController.BASE_URL)
 public class WithoutSelectedController {
-    public static final String BASE_URL = "/api/v1/onlyselected";
+    public static final String BASE_URL = "/api/v1/withoutselected";
 
-    private final WithoutSelectedService onlySelectedService;
+    private final WithoutSelectedService withoutSelectedService;
 
-    public WithoutSelectedController(WithoutSelectedService onlySelectedService) {
-        this.onlySelectedService = onlySelectedService;
+    public WithoutSelectedController(WithoutSelectedService withoutSelectedService) {
+        this.withoutSelectedService = withoutSelectedService;
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.OK)
-    public String onlySelectedJson(@RequestBody String json, @RequestParam String keys) {
-        return onlySelectedService.getOnlySelectedJson(json, keys);
+    public String withoutSelectedJson(@RequestBody String json, @RequestParam String keys) {
+        return withoutSelectedService.getWithoutSelectedJson(json, keys);
     }
 }
