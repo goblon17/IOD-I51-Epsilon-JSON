@@ -1,45 +1,51 @@
-package put.cs.jsontools.transformations;
+package put.cs.jsontools.transforms;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
-import java.sql.SQLOutput;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
 @Component
-public class OnlySelectedTransformationImpl implements OnlySelectedTransformation {
+public class WithoutSelectedTransformer extends JsonTransformerDecorator{
+    public WithoutSelectedTransformer(@Qualifier("beautifierTransformerImpl") JsonTransformer jsonTransformer) {
+        super(jsonTransformer);
+    }
 
     @Override
-    public String transformToOnlySelected (String json, String keys) {
-        ObjectMapper objectMapper = new ObjectMapper();
+    public String transform(String json, String keys) {
+        String refactoredJson = transformToWithoutSelected(json, keys);
+        return super.transform(json, null);
+    }
 
+    public String transformToWithoutSelected(String json, String keys) {
+        ObjectMapper objectMapper = new ObjectMapper();
         try {
             JsonNode jsonNode = objectMapper.readTree(json);
             List<String> keysList = Arrays.asList(keys.split("\\s*,\\s*"));
-
-            leaveKeys(jsonNode, keysList);
+            removeKeys(jsonNode, keysList);
             return objectMapper.writeValueAsString(jsonNode);
         } catch (JsonProcessingException e) {
             return null;
         }
     }
 
-    public static void leaveKeys(final JsonNode jsonNode, List<String> keysToLeave) {
+    public static void removeKeys(final JsonNode jsonNode, List<String> keysToRemove) {
         Iterator<Map.Entry<String, JsonNode>> iter = jsonNode.fields();
-        System.out.println(keysToLeave);
+
         while (iter.hasNext()) {
             Map.Entry<String, JsonNode> entry = iter.next();
-
-            if (!keysToLeave.contains(entry.getKey())) {
+            if (keysToRemove.contains(entry.getKey())) {
                 iter.remove();
             } else if (entry.getValue().isContainerNode()) {
-                leaveKeys(entry.getValue(), keysToLeave);
+                removeKeys(entry.getValue(), keysToRemove);
             }
         }
     }
+
 }
