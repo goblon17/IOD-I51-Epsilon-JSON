@@ -1,22 +1,19 @@
 package put.cs.jsontools.services.implementation;
 
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import put.cs.jsontools.exceptions.InvalidJsonFormatException;
 import put.cs.jsontools.services.OnlySelectedService;
-import put.cs.jsontools.transforms.JsonTransformer;
+import put.cs.jsontools.transformations.OnlySelectedTransformation;
 
 @Service
 public class OnlySelectedServiceImpl implements OnlySelectedService {
-    private final JsonTransformer jsonTransformer;
+    private final OnlySelectedTransformation transformation;
 
-    public OnlySelectedServiceImpl(@Qualifier("onlySelectedTransformer") JsonTransformer jsonTransformer) {
-        this.jsonTransformer = jsonTransformer;
-    }
+    public OnlySelectedServiceImpl(OnlySelectedTransformation transformation) {this.transformation = transformation;}
 
     @Override
     public String getOnlySelectedJson(String json, String keys) throws InvalidJsonFormatException {
-        String result = jsonTransformer.transform(json, keys);
+        String result = transformation.transformToOnlySelected(json, keys);
         if (result == null) {
             throw new InvalidJsonFormatException();
         }

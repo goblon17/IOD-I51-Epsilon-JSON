@@ -1,23 +1,19 @@
 package put.cs.jsontools.services.implementation;
 
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import put.cs.jsontools.exceptions.InvalidJsonFormatException;
 import put.cs.jsontools.services.WithoutSelectedService;
-import put.cs.jsontools.transforms.JsonTransformer;
+import put.cs.jsontools.transformations.WithoutSelectedTransformation;
 
 @Service
 public class WithoutSelectedServiceImpl implements WithoutSelectedService {
 
-    private final JsonTransformer jsonTransformer;
+    private final WithoutSelectedTransformation transformation;
 
-    public WithoutSelectedServiceImpl(@Qualifier("withoutSelectedTransformer") JsonTransformer jsonTransformer) {
-        this.jsonTransformer = jsonTransformer;
-    }
-
+    public WithoutSelectedServiceImpl(WithoutSelectedTransformation transformation) {this.transformation = transformation;}
     @Override
     public String getWithoutSelectedJson(String json, String keys) throws InvalidJsonFormatException {
-        String result = jsonTransformer.transform(json, keys);
+        String result = transformation.transformToWithoutSelected(json, keys);
         if (result == null) {
             throw new InvalidJsonFormatException();
         }
