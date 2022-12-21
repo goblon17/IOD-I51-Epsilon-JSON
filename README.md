@@ -1,4 +1,7 @@
 # IOD-I51-Epsilon-JSON
+
+![Build status](https://github.com/goblon17/IOD-I51-Epsilon-JSON/actions/workflows/github-ci.yml/badge.svg)
+
 Projekt z Inżynierii Oprogramowania
 
 ## Aplikacja JSON tools
