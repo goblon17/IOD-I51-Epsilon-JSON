@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes and Interfaces","u":"allclasses-index.html"},{"p":"put.cs.jsontools.transforms","l":"JsonTransformer"},{"p":"put.cs.jsontools.transforms","l":"JsonTransformerDecorator"},{"p":"put.cs.jsontools.transforms","l":"MiniferTransformerImpl"}];updateSearchResults();
