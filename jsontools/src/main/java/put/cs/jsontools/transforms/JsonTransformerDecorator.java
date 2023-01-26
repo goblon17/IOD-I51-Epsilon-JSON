@@ -2,6 +2,9 @@ package put.cs.jsontools.transforms;
 
 import lombok.Data;
 
+/**
+ * @Author adam ma kota
+ */
 @Data
 public abstract class JsonTransformerDecorator implements JsonTransformer{
     private final JsonTransformer jsonTransformer;
