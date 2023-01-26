@@ -11,7 +11,7 @@ import put.cs.jsontools.transforms.JsonTransformer;
 @Service
 public class BeautifierServiceImpl implements BeautifierService {
 
-    private final JsonTransformer jsonTransformer;
+    inal JsonTransformer jsonTransformer;
 
     public BeautifierServiceImpl(@Qualifier("beautifierTransformerImpl") JsonTransformer jsonTransformer) {
         this.jsonTransformer = jsonTransformer;
